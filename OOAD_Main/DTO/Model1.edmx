@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="calendarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CuocHop">
+          <Key>
+            <PropertyRef Name="id_ch" />
+          </Key>
+          <Property Name="id_ch" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ten_ch" Type="nvarchar" MaxLength="50" />
+          <Property Name="dia_diem" Type="nvarchar" MaxLength="100" />
+          <Property Name="tg_batdau" Type="datetime" />
+          <Property Name="tg_ketthuc" Type="datetime" />
+          <Property Name="id_host" Type="nvarchar" MaxLength="10" />
+          <Property Name="loi_nhac" Type="bit" />
+        </EntityType>
+        <EntityType Name="NguoiDung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="tk" Type="nvarchar" MaxLength="50" />
+          <Property Name="mk" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="NguoiDung_CuocHop">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_ch" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_ch" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CuocHop__id_host__398D8EEE">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="CuocHop" Type="Self.CuocHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CuocHop">
+              <PropertyRef Name="id_host" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiDung__id_ch__3D5E1FD2">
+          <End Role="CuocHop" Type="Self.CuocHop" Multiplicity="1" />
+          <End Role="NguoiDung_CuocHop" Type="Self.NguoiDung_CuocHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuocHop">
+              <PropertyRef Name="id_ch" />
+            </Principal>
+            <Dependent Role="NguoiDung_CuocHop">
+              <PropertyRef Name="id_ch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiDung_Cu__id__3C69FB99">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
+          <End Role="NguoiDung_CuocHop" Type="Self.NguoiDung_CuocHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NguoiDung_CuocHop">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="calendarModelStoreContainer">
+          <EntitySet Name="CuocHop" EntityType="Self.CuocHop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiDung_CuocHop" EntityType="Self.NguoiDung_CuocHop" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CuocHop__id_host__398D8EEE" Association="Self.FK__CuocHop__id_host__398D8EEE">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="CuocHop" EntitySet="CuocHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiDung__id_ch__3D5E1FD2" Association="Self.FK__NguoiDung__id_ch__3D5E1FD2">
+            <End Role="CuocHop" EntitySet="CuocHop" />
+            <End Role="NguoiDung_CuocHop" EntitySet="NguoiDung_CuocHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiDung_Cu__id__3C69FB99" Association="Self.FK__NguoiDung_Cu__id__3C69FB99">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="NguoiDung_CuocHop" EntitySet="NguoiDung_CuocHop" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="calendarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CuocHop">
+          <Key>
+            <PropertyRef Name="id_ch" />
+          </Key>
+          <Property Name="id_ch" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ten_ch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dia_diem" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tg_batdau" Type="DateTime" Precision="3" />
+          <Property Name="tg_ketthuc" Type="DateTime" Precision="3" />
+          <Property Name="id_host" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="loi_nhac" Type="Boolean" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__CuocHop__id_host__398D8EEE" FromRole="CuocHop" ToRole="NguoiDung" />
+          <NavigationProperty Name="NguoiDungs" Relationship="Self.NguoiDung_CuocHop" FromRole="CuocHop" ToRole="NguoiDung" />
+        </EntityType>
+        <EntityType Name="NguoiDung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CuocHops" Relationship="Self.FK__CuocHop__id_host__398D8EEE" FromRole="NguoiDung" ToRole="CuocHop" />
+          <NavigationProperty Name="CuocHops1" Relationship="Self.NguoiDung_CuocHop" FromRole="NguoiDung" ToRole="CuocHop" />
+        </EntityType>
+        <Association Name="FK__CuocHop__id_host__398D8EEE">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="CuocHop" Type="Self.CuocHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CuocHop">
+              <PropertyRef Name="id_host" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NguoiDung_CuocHop">
+          <End Role="CuocHop" Type="Self.CuocHop" Multiplicity="*" />
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="calendarConText" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CuocHops" EntityType="Self.CuocHop" />
+          <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
+          <AssociationSet Name="FK__CuocHop__id_host__398D8EEE" Association="Self.FK__CuocHop__id_host__398D8EEE">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="CuocHop" EntitySet="CuocHops" />
+          </AssociationSet>
+          <AssociationSet Name="NguoiDung_CuocHop" Association="Self.NguoiDung_CuocHop">
+            <End Role="CuocHop" EntitySet="CuocHops" />
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="calendarModelStoreContainer" CdmEntityContainer="calendarConText">
+          <EntitySetMapping Name="CuocHops">
+            <EntityTypeMapping TypeName="calendarModel.CuocHop">
+              <MappingFragment StoreEntitySet="CuocHop">
+                <ScalarProperty Name="id_ch" ColumnName="id_ch" />
+                <ScalarProperty Name="ten_ch" ColumnName="ten_ch" />
+                <ScalarProperty Name="dia_diem" ColumnName="dia_diem" />
+                <ScalarProperty Name="tg_batdau" ColumnName="tg_batdau" />
+                <ScalarProperty Name="tg_ketthuc" ColumnName="tg_ketthuc" />
+                <ScalarProperty Name="id_host" ColumnName="id_host" />
+                <ScalarProperty Name="loi_nhac" ColumnName="loi_nhac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiDungs">
+            <EntityTypeMapping TypeName="calendarModel.NguoiDung">
+              <MappingFragment StoreEntitySet="NguoiDung">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tk" ColumnName="tk" />
+                <ScalarProperty Name="mk" ColumnName="mk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NguoiDung_CuocHop" TypeName="calendarModel.NguoiDung_CuocHop" StoreEntitySet="NguoiDung_CuocHop">
+            <EndProperty Name="CuocHop">
+              <ScalarProperty Name="id_ch" ColumnName="id_ch" />
+            </EndProperty>
+            <EndProperty Name="NguoiDung">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
